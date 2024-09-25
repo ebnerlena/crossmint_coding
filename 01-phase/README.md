@@ -18,5 +18,6 @@ Here you have the basic API specification you will need: Docs. Note that for thi
 
 ## Steps
 
-- npm i typescript ts-node --save-dev
+- npm i typescript --save-dev
 - npx tsc --init
+- npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
