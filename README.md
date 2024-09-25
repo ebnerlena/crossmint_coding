@@ -1,5 +1,7 @@
 # Crossmint Coding Challenge
 
+Author: Lena Ebner
+
 Welcome to our Crossmint coding challenge, in which you will help us mint a new megaverse into existence!
 
 Megaverses are 2D spaces comprised of combinations of different astral objects: 🪐POLYanets with 🌙SOLoons around them and ☄comETHs floating around.
