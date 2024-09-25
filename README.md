@@ -1,6 +1,6 @@
 # Crossmint Coding Challenge
 
-Author: Lena Ebner
+**Author**: Lena Ebner
 
 Welcome to our Crossmint coding challenge, in which you will help us mint a new megaverse into existence!
 
@@ -10,9 +10,11 @@ Your job as the master of the megaverse will be to create one with some given pa
 
 The challenge is composed of 2 phases. In the first one you will learn how to interact with the API and create some 🪐POLYanets and validate them. In the second one you will create a bigger megaverse with some peculiar shape.
 
-## Instructions
+- [Phase 1 Solution](./01-phase/)
+- [Phase 2 Solution](./02-phase/)
+- [Docs](./docs/)
 
-Instructions:
+## Instructions
 
 - Begin by going to https://challenge.crossmint.com, please read carefully the challenge background.
 - Then go to challenge.crossmint.com/candidate and enter your CANDIDATE ID: <INSERT_HERE>
