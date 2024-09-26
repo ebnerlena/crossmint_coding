@@ -6,9 +6,12 @@ dotenv.config();
 const API_ROUTE = "https://challenge.crossmint.io/api/";
 const POLYNETS_API_ENDPOINT = "/polyanets";
 const DEFAULT_DELAY_MS = 1000;
+const GRID_SIZE = 11;
+const GRID_OFFSET = 2;
+const RETRY_LIMIT = 4;
 
 // Function to place a 🪐 on the map
-async function placePlanet(polyanet: Polyanet): Promise<boolean> {
+const placePlanet = async (polyanet: Polyanet): Promise<boolean> => {
 	const { row, column } = polyanet;
 	try {
 		const response = await fetch(`${API_ROUTE}${POLYNETS_API_ENDPOINT}`, {
@@ -39,48 +42,42 @@ async function placePlanet(polyanet: Polyanet): Promise<boolean> {
 		console.error("Failed to place 🪐:", error);
 		return false;
 	}
-}
+};
 
-// Coordinates of 🪐
-const coordinates = [
-	{ row: 2, column: 2 },
-	{ row: 2, column: 8 },
-	{ row: 3, column: 3 },
-	{ row: 3, column: 7 },
-	{ row: 4, column: 4 },
-	{ row: 4, column: 6 },
-	{ row: 5, column: 5 },
-	{ row: 6, column: 4 },
-	{ row: 6, column: 6 },
-	{ row: 7, column: 3 },
-	{ row: 7, column: 7 },
-	{ row: 8, column: 2 },
-	{ row: 8, column: 8 },
-];
+const generateCoordinatesofPolyanets = (): Array<Polyanet> => {
+	const coordinates = new Set<Polyanet>();
 
-function delay(ms: number) {
+	for (let y = GRID_OFFSET; y < GRID_SIZE - GRID_OFFSET; y++) {
+		coordinates.add({ row: y, column: y }); // First column (X)
+		coordinates.add({ row: y, column: GRID_SIZE - (y + 1) }); // Symmetrical column (X mirrored)
+	}
+
+	return Array.from(coordinates);
+};
+
+const delay = (ms: number) => {
 	return new Promise(resolve => setTimeout(resolve, ms));
-}
+};
 
 // Loop through the coordinates to place Polyanets
-async function createMap() {
-	for (const { row, column } of coordinates) {
-		const newPolyanet: Polyanet = { row, column };
+const createMap = async () => {
+	const polyanets = generateCoordinatesofPolyanets();
 
-		let success = await placePlanet(newPolyanet);
+	for (const polyanet of polyanets) {
+		let success = await placePlanet(polyanet);
 		let retryCount = 1;
 
-		while (!success && retryCount < 4) {
+		while (!success && retryCount < RETRY_LIMIT) {
 			// Add delay to overcome 429 Too Many Requests Error and retry 3 times
-			console.log(`Retrying ${retryCount}: placing 🪐 at row: ${row}, column: ${column}`);
+			console.log(`Retrying ${retryCount}: placing 🪐 at row: ${polyanet.row}, column: ${polyanet.column}`);
 			await delay(DEFAULT_DELAY_MS * retryCount);
 
 			retryCount++;
-			success = await placePlanet(newPolyanet);
+			success = await placePlanet(polyanet);
 		}
 	}
 	console.log("\nFinished creating 🪐 megaverse!");
-}
+};
 
 // Execute the map creation
 createMap();
