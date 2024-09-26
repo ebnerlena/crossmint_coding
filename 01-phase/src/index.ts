@@ -24,8 +24,7 @@ async function placePlanet(polyanet: Polyanet): Promise<boolean> {
 		});
 
 		if (!response.ok) {
-			console.log(response.status, response.statusText);
-
+			// Handle Too Many Requests Error
 			if (response.status === 429) {
 				return false;
 			}
