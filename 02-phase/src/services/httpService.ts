@@ -8,7 +8,7 @@ const DEFAULT_HEADERS = {
 	"Content-Type": "application/json",
 };
 
-const CANDIDATE_ID = process.env.CANDIDATE_ID;
+const CANDIDATE_ID = () => process.env.CANDIDATE_ID;
 
 export class HttpService {
 	private baseUrl: string;
@@ -59,7 +59,7 @@ export class HttpService {
 		const response = this.fetchRequest(endpoint, {
 			method: "POST",
 			headers: DEFAULT_HEADERS,
-			body: JSON.stringify({ candidateId: CANDIDATE_ID, ...data }),
+			body: JSON.stringify({ candidateId: CANDIDATE_ID(), ...data }),
 		});
 
 		return response as T;
@@ -70,7 +70,7 @@ export class HttpService {
 		return this.fetchRequest(endpoint, {
 			method: "DELETE",
 			headers: DEFAULT_HEADERS,
-			body: JSON.stringify({ candidateId: CANDIDATE_ID, ...data }),
+			body: JSON.stringify({ candidateId: CANDIDATE_ID(), ...data }),
 		}) as T;
 	}
 }
