@@ -1,0 +1,26 @@
+{
+	"name": "crossmint-oo-coding-interview",
+	"author": {
+		"name": "Lena Ebner",
+		"url": "https://lenaebner.com"
+	},
+	"license": "",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"start": "tsc  && node dist/index.js",
+		"build": "tsc",
+		"dev": "tsc -W",
+		"lint": "eslint ./src"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.11.1",
+		"@types/node": "^22.7.0",
+		"@typescript-eslint/eslint-plugin": "^8.7.0",
+		"@typescript-eslint/parser": "^8.7.0",
+		"eslint": "^9.11.1",
+		"globals": "^15.9.0",
+		"typescript": "^5.6.2",
+		"typescript-eslint": "^8.7.0"
+	}
+}
